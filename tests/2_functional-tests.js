@@ -64,9 +64,11 @@ suite("Functional Tests", function () {
 });
 
 const Browser = require("zombie");
+Browser.site = 'https://boilerplate-mochachai.immeprobably.repl.co';
 
 suite("Functional Tests with Zombie.js", function () {
-
+  const browser = new Browser();
+  suiteSetup(done => browser.visit('/', done));
   suite('"Famous Italian Explorers" form', function () {
     // #5
     test('submit "surname" : "Colombo" - write your e2e test...', function (done) {
