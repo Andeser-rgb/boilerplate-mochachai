@@ -15,7 +15,7 @@ suite("Functional Tests", function () {
         .get("/hello")
         .end(function (err, res) {
           assert.equal(res.status, 200);
-          assert.notEqual(res.text, "hello Guest");
+          assert.equal(res.text, "hello Guest");
           done();
         });
     });
@@ -35,11 +35,13 @@ suite("Functional Tests", function () {
       chai
         .request(server)
         .put("/travellers")
-
+        .send({surname: 'Colombo'})
         .end(function (err, res) {
-          assert.fail();
-
-          done();
+            assert.equal(res.status, 200);
+            assert.equal(res.type, 'application/json');
+            assert.equal(res.body.name, 'Cristoforo');
+            assert.equal(res.body.surname, 'Colombo');
+            done();
         });
     });
     // #4
